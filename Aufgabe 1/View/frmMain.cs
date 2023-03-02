@@ -32,7 +32,7 @@ namespace Aufgabe_1
         const int ANZAHL_SITZPLAETZE = 10;
         private string SaalName;
         private List<Sitzplatz> _sitzplatzliste;
-
+        string hallo;
 
         public frmMain()
         {
