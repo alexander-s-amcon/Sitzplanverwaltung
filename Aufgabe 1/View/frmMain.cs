@@ -1,25 +1,13 @@
 ﻿using C1.Win.C1FlexGrid;
-using Microsoft.SqlServer.Server;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Data.SQLite;
-using System.Data.SqlTypes;
-using System.Drawing.Text;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
-using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Sql;
-using System.Xml;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
-using System.Runtime.InteropServices;
-using C1.Win.C1TrueDBGrid.Localization;
+using Aufgabe_1.Datenbankmethoden;
+using Aufgabe_1.Interfaces.Datenbankmethoden;
 
 namespace Aufgabe_1
 {
@@ -45,24 +33,13 @@ namespace Aufgabe_1
 
         private void LadeSaele()
         {
-            db_Connection.Open();
-            SQLiteCommand sql_Command = new SQLiteCommand();
-            sql_Command = db_Connection.CreateCommand();
-            sql_Command.CommandText = "SELECT * FROM Saele";
-            SQLiteDataReader reader = sql_Command.ExecuteReader();
-            List<Saele> saalliste = new List<Saele>();
-            while (reader.Read())
-            {
-                Saele Saal = new Saele();
-                //Saal.Id = reader.GetInt32(0);
-                Saal.Saalname = reader.GetString(1);
-                saalliste.Add(Saal);
-            }
-            sql_Command.Dispose();
-            db_Connection.Close();
+            IDBSaal dBSaal = new DBSaal();
+            List <Saele> saalliste = dBSaal.LadeSaal();
             dataGridView1.DataSource = saalliste;
             DataGridViewColumn column = dataGridView1.Columns[0];
-            column.Width = 167;
+            column.Width = 20;
+            DataGridViewColumn column2 = dataGridView1.Columns[1];
+            column2.Width = 167;
             this.dataGridView1.ClearSelection();
         }
 

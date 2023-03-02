@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Aufgabe_1
 {
-    internal class Saele
+    public class Saele
     {
-        //public int Id { get; set; }
+        public int Id { get; set; }
         public string Saalname { get; set; }
 
     }

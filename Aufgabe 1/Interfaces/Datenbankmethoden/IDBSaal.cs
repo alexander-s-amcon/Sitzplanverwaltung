@@ -8,6 +8,6 @@ namespace Aufgabe_1.Interfaces.Datenbankmethoden
 {
     public interface IDBSaal
     {
-        string LadeSaal();
+        List<Saele> LadeSaal();
     }
 }

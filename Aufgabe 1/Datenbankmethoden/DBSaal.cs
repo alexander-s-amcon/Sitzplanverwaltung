@@ -11,8 +11,13 @@ namespace Aufgabe_1.Datenbankmethoden
 {
     public class DBSaal : IDBSaal
     {
-        public string LadeSaal()
+        const string connectionString = "Data Source = Datenbank.sqlite;";
+        private SQLiteConnection db_Connection = null;
+
+        public List<Saele> LadeSaal()
         {
+            db_Connection = new SQLiteConnection();
+            db_Connection.ConnectionString = connectionString;
             db_Connection.Open();
             SQLiteCommand sql_Command = new SQLiteCommand();
             sql_Command = db_Connection.CreateCommand();
@@ -22,16 +27,14 @@ namespace Aufgabe_1.Datenbankmethoden
             while (reader.Read())
             {
                 Saele Saal = new Saele();
-                //Saal.Id = reader.GetInt32(0);
+                Saal.Id = reader.GetInt32(0);
                 Saal.Saalname = reader.GetString(1);
                 saalliste.Add(Saal);
             }
             sql_Command.Dispose();
             db_Connection.Close();
-            dataGridView1.DataSource = saalliste;
-            DataGridViewColumn column = dataGridView1.Columns[0];
-            column.Width = 167;
-            this.dataGridView1.ClearSelection();
+
+            return saalliste;
         }
     }
 }

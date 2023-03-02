@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Aufgabe_1
 {
-    internal class Tables
+    public class Tables
     {
         public string Table { get; set; }
     }
