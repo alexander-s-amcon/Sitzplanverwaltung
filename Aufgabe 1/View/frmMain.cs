@@ -20,8 +20,6 @@ namespace Aufgabe_1
         const int ANZAHL_SITZPLAETZE = 10;
         private string SaalName;
         private List<Sitzplatz> _sitzplatzliste;
-        string hallo;
-
         public frmMain()
         {
             InitializeComponent();
@@ -194,6 +192,7 @@ namespace Aufgabe_1
 
         private void c1FlexGrid1_Click(object sender, EventArgs e)
         {
+            LadeDatenbankeintraege();
             int row = c1FlexGrid1.Row;
             int col = c1FlexGrid1.Col;
             CellStyle c1 = c1FlexGrid1.Styles.Add("Reserviert");
@@ -264,14 +263,13 @@ namespace Aufgabe_1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            frmSaal fSaal = new frmSaal();
-            fSaal.Show();
+            frmSaal frmSaal = new frmSaal();
+            frmSaal.ShowDialog();
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            
-            LadeDatenbankeintraege();
+
         }
     }
 }
