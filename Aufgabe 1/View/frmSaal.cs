@@ -14,21 +14,38 @@ namespace Aufgabe_1
 {
     public partial class frmSaal : Form
     {
-        public string Saalname;
+        private bool erfolg;
 
         public frmSaal()
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
         }
 
+        public bool Zeige(ref Saele saal)
+        {
+            textBox1.Text = saal.Saalname;
+            numericUpDown1.Value = saal.Reihen;
+            numericUpDown2.Value = saal.Sitzplaetze;
+            ShowDialog();
+
+            if (erfolg == true)
+            {
+                saal.Saalname = textBox1.Text;
+                saal.Reihen = Convert.ToInt32(numericUpDown1.Value);
+                saal.Sitzplaetze = Convert.ToInt32(numericUpDown2.Value);
+            }
+            return erfolg;
+        }
         private void btnOK_Click(object sender, EventArgs e)
         {
-            frmMain f1 = new frmMain();
-            Saalname = textBox1.Text;
-            IDBSaal dBSaal = new DBSaal();
-            Saele saal = new Saele(); 
-            saal.Saalname = Saalname;
-            dBSaal.AddSaal(saal);
+            erfolg = true;
+            this.Close();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            erfolg = false;
             this.Close();
         }
     }

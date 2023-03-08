@@ -10,6 +10,7 @@ namespace Aufgabe_1
     {
         public int Id { get; set; }
         public string Saalname { get; set; }
-
+        public int Reihen { get; set; }
+        public int Sitzplaetze { get; set; }
     }
 }

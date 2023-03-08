@@ -1,4 +1,5 @@
 ﻿using Aufgabe_1.Interfaces.Datenbankmethoden;
+using Aufgabe_1.Model;
 using C1.Win.C1FlexGrid;
 using System;
 using System.Collections.Generic;
@@ -21,11 +22,11 @@ namespace Aufgabe_1.Datenbankmethoden
         }
 
         public void AddSaal(Saele saal)
-        {   
+        {
             db_Connection.Open();
             SQLiteCommand sql_Command = new SQLiteCommand();
             sql_Command = db_Connection.CreateCommand();
-            sql_Command.CommandText = "INSERT INTO Saele(Saalname) VALUES ('" + saal.Saalname + "')";
+            sql_Command.CommandText = $"INSERT INTO Saele(Saalname, Reihen, Sitzplaetze) VALUES ('{saal.Saalname}','{saal.Reihen}','{saal.Sitzplaetze}')";
             sql_Command.ExecuteNonQuery();
             sql_Command.Dispose();
             db_Connection.Close();
@@ -36,11 +37,11 @@ namespace Aufgabe_1.Datenbankmethoden
             db_Connection.Open();
             SQLiteCommand sql_Command = new SQLiteCommand();
             sql_Command = db_Connection.CreateCommand();
-            //sql_Command.CommandText = "DELETE FROM Saele WHERE Id = '" + Id + "'";
+            sql_Command.CommandText = "DELETE FROM Saele WHERE Id = '" + saal.Id + "'";
             sql_Command.ExecuteNonQuery();
             sql_Command.Dispose();
             db_Connection.Close();
-
+            return;
         }
 
         public void EditSaal(Saele saal)
@@ -48,7 +49,7 @@ namespace Aufgabe_1.Datenbankmethoden
             db_Connection.Open();
             SQLiteCommand sql_Command = new SQLiteCommand();
             sql_Command = db_Connection.CreateCommand();
-            //sql_Command.CommandText = "UPDATE Saele SET Saal = 'Reserviert' WHERE Id = '" + Id + "'";
+            sql_Command.CommandText = $"UPDATE Saele SET Saalname = '{saal.Saalname}', Reihen = {saal.Reihen}, Sitzplaetze = {saal.Sitzplaetze} WHERE Id = {saal.Id}";
             sql_Command.ExecuteNonQuery();
             sql_Command.Dispose();
             db_Connection.Close();
@@ -70,11 +71,12 @@ namespace Aufgabe_1.Datenbankmethoden
                 Saele Saal = new Saele();
                 Saal.Id = reader.GetInt32(0);
                 Saal.Saalname = reader.GetString(1);
+                Saal.Reihen = reader.GetInt32(2);
+                Saal.Sitzplaetze = reader.GetInt32(3);
                 saalliste.Add(Saal);
             }
             sql_Command.Dispose();
             db_Connection.Close();
-
             return saalliste;
         }
     }

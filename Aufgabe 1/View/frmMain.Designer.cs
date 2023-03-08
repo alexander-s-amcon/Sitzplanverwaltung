@@ -30,13 +30,17 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.c1FlexGrid1 = new C1.Win.C1FlexGrid.C1FlexGrid();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnSaalAdd = new System.Windows.Forms.Button();
+            this.btnSaalEdit = new System.Windows.Forms.Button();
+            this.btnSaalDelete = new System.Windows.Forms.Button();
+            this.gridSaal = new C1.Win.C1FlexGrid.C1FlexGrid();
+            this.gridVeranstaltungen = new C1.Win.C1FlexGrid.C1FlexGrid();
+            this.btnVeranstaltungAdd = new System.Windows.Forms.Button();
+            this.btnVeranstaltungEdit = new System.Windows.Forms.Button();
+            this.btnVeranstaltundDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.c1FlexGrid1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridSaal)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridVeranstaltungen)).BeginInit();
             this.SuspendLayout();
             // 
             // c1FlexGrid1
@@ -44,97 +48,144 @@
             this.c1FlexGrid1.BorderStyle = C1.Win.C1FlexGrid.Util.BaseControls.BorderStyleEnum.FixedSingle;
             this.c1FlexGrid1.ColumnInfo = resources.GetString("c1FlexGrid1.ColumnInfo");
             this.c1FlexGrid1.HighLight = C1.Win.C1FlexGrid.HighLightEnum.WithFocus;
-            this.c1FlexGrid1.Location = new System.Drawing.Point(12, 242);
+            this.c1FlexGrid1.Location = new System.Drawing.Point(12, 368);
             this.c1FlexGrid1.Name = "c1FlexGrid1";
             this.c1FlexGrid1.Rows.Count = 11;
             this.c1FlexGrid1.SelectionMode = C1.Win.C1FlexGrid.SelectionModeEnum.Cell;
-            this.c1FlexGrid1.Size = new System.Drawing.Size(352, 211);
+            this.c1FlexGrid1.Size = new System.Drawing.Size(378, 286);
             this.c1FlexGrid1.TabIndex = 0;
             this.c1FlexGrid1.Click += new System.EventHandler(this.c1FlexGrid1_Click);
             // 
-            // button1
+            // btnSaalAdd
             // 
-            this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(194, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(170, 47);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "neue Veranstaltung planen";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnSaalAdd.BackColor = System.Drawing.Color.White;
+            this.btnSaalAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSaalAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaalAdd.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnSaalAdd.Location = new System.Drawing.Point(13, 251);
+            this.btnSaalAdd.Name = "btnSaalAdd";
+            this.btnSaalAdd.Size = new System.Drawing.Size(165, 33);
+            this.btnSaalAdd.TabIndex = 3;
+            this.btnSaalAdd.Text = "Saal hinzufügen";
+            this.btnSaalAdd.UseVisualStyleBackColor = false;
+            this.btnSaalAdd.Click += new System.EventHandler(this.btnSaalAdd_Click);
             // 
-            // button2
+            // btnSaalEdit
             // 
-            this.button2.BackColor = System.Drawing.Color.White;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(194, 65);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(170, 47);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Veranstaltung anpassen";
-            this.button2.UseVisualStyleBackColor = false;
+            this.btnSaalEdit.BackColor = System.Drawing.Color.White;
+            this.btnSaalEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSaalEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaalEdit.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnSaalEdit.Location = new System.Drawing.Point(13, 290);
+            this.btnSaalEdit.Name = "btnSaalEdit";
+            this.btnSaalEdit.Size = new System.Drawing.Size(165, 33);
+            this.btnSaalEdit.TabIndex = 3;
+            this.btnSaalEdit.Text = "Saal bearbeiten";
+            this.btnSaalEdit.UseVisualStyleBackColor = false;
+            this.btnSaalEdit.Click += new System.EventHandler(this.btnSaalEdit_Click);
             // 
-            // dataGridView1
+            // btnSaalDelete
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.ColumnHeadersVisible = false;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 12);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(170, 206);
-            this.dataGridView1.TabIndex = 2;
-            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.btnSaalDelete.BackColor = System.Drawing.Color.White;
+            this.btnSaalDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSaalDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaalDelete.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnSaalDelete.Location = new System.Drawing.Point(13, 329);
+            this.btnSaalDelete.Name = "btnSaalDelete";
+            this.btnSaalDelete.Size = new System.Drawing.Size(165, 33);
+            this.btnSaalDelete.TabIndex = 3;
+            this.btnSaalDelete.Text = "Saal löschen";
+            this.btnSaalDelete.UseVisualStyleBackColor = false;
+            this.btnSaalDelete.Click += new System.EventHandler(this.btnSaalDelete_Click);
             // 
-            // button3
+            // gridSaal
             // 
-            this.button3.BackColor = System.Drawing.Color.White;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button3.Location = new System.Drawing.Point(194, 118);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(170, 47);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Saal hinzufügen";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.gridSaal.AllowDragging = C1.Win.C1FlexGrid.AllowDraggingEnum.None;
+            this.gridSaal.AllowEditing = false;
+            this.gridSaal.ColumnInfo = "3,1,0,0,0,-1,Columns:1{Width:39;Visible:False;Style:\"Font:Microsoft Sans Serif, 8" +
+    ".25pt;\";}\t";
+            this.gridSaal.Location = new System.Drawing.Point(13, 12);
+            this.gridSaal.Name = "gridSaal";
+            this.gridSaal.Size = new System.Drawing.Size(165, 232);
+            this.gridSaal.StyleInfo = resources.GetString("gridSaal.StyleInfo");
+            this.gridSaal.TabIndex = 4;
+            this.gridSaal.Click += new System.EventHandler(this.gridSaal_Click);
             // 
-            // button4
+            // gridVeranstaltungen
             // 
-            this.button4.BackColor = System.Drawing.Color.White;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button4.Location = new System.Drawing.Point(194, 171);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(170, 47);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "Saal hinzufügen";
-            this.button4.UseVisualStyleBackColor = false;
-            this.button4.Click += new System.EventHandler(this.button3_Click);
+            this.gridVeranstaltungen.AllowDragging = C1.Win.C1FlexGrid.AllowDraggingEnum.None;
+            this.gridVeranstaltungen.AllowEditing = false;
+            this.gridVeranstaltungen.ColumnInfo = "3,1,0,0,0,-1,Columns:1{Width:39;Visible:False;Style:\"Font:Microsoft Sans Serif, 8" +
+    ".25pt;\";}\t";
+            this.gridVeranstaltungen.Location = new System.Drawing.Point(194, 12);
+            this.gridVeranstaltungen.Name = "gridVeranstaltungen";
+            this.gridVeranstaltungen.Size = new System.Drawing.Size(165, 232);
+            this.gridVeranstaltungen.StyleInfo = resources.GetString("gridVeranstaltungen.StyleInfo");
+            this.gridVeranstaltungen.TabIndex = 4;
+            this.gridVeranstaltungen.Click += new System.EventHandler(this.gridVeranstaltungen_Click);
             // 
-            // Form1
+            // btnVeranstaltungAdd
+            // 
+            this.btnVeranstaltungAdd.BackColor = System.Drawing.Color.White;
+            this.btnVeranstaltungAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnVeranstaltungAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVeranstaltungAdd.Location = new System.Drawing.Point(194, 251);
+            this.btnVeranstaltungAdd.Name = "btnVeranstaltungAdd";
+            this.btnVeranstaltungAdd.Size = new System.Drawing.Size(165, 33);
+            this.btnVeranstaltungAdd.TabIndex = 5;
+            this.btnVeranstaltungAdd.Text = "Veranstaltung planen";
+            this.btnVeranstaltungAdd.UseVisualStyleBackColor = false;
+            this.btnVeranstaltungAdd.Click += new System.EventHandler(this.btnVeranstaltungAdd_Click);
+            // 
+            // btnVeranstaltungEdit
+            // 
+            this.btnVeranstaltungEdit.BackColor = System.Drawing.Color.White;
+            this.btnVeranstaltungEdit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnVeranstaltungEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVeranstaltungEdit.Location = new System.Drawing.Point(194, 290);
+            this.btnVeranstaltungEdit.Name = "btnVeranstaltungEdit";
+            this.btnVeranstaltungEdit.Size = new System.Drawing.Size(165, 33);
+            this.btnVeranstaltungEdit.TabIndex = 6;
+            this.btnVeranstaltungEdit.Text = "Veranstaltung bearbeiten";
+            this.btnVeranstaltungEdit.UseVisualStyleBackColor = false;
+            this.btnVeranstaltungEdit.Click += new System.EventHandler(this.btnVeranstaltungEdit_Click);
+            // 
+            // btnVeranstaltundDelete
+            // 
+            this.btnVeranstaltundDelete.BackColor = System.Drawing.Color.White;
+            this.btnVeranstaltundDelete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnVeranstaltundDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVeranstaltundDelete.Location = new System.Drawing.Point(194, 329);
+            this.btnVeranstaltundDelete.Name = "btnVeranstaltundDelete";
+            this.btnVeranstaltundDelete.Size = new System.Drawing.Size(165, 33);
+            this.btnVeranstaltundDelete.TabIndex = 7;
+            this.btnVeranstaltundDelete.Text = "Veranstaltung löschen";
+            this.btnVeranstaltundDelete.UseVisualStyleBackColor = false;
+            this.btnVeranstaltundDelete.Click += new System.EventHandler(this.btnVeranstaltundDelete_Click);
+            // 
+            // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(374, 466);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(402, 696);
+            this.Controls.Add(this.btnVeranstaltundDelete);
+            this.Controls.Add(this.btnVeranstaltungEdit);
+            this.Controls.Add(this.btnVeranstaltungAdd);
+            this.Controls.Add(this.gridVeranstaltungen);
+            this.Controls.Add(this.gridSaal);
+            this.Controls.Add(this.btnSaalDelete);
+            this.Controls.Add(this.btnSaalEdit);
+            this.Controls.Add(this.btnSaalAdd);
             this.Controls.Add(this.c1FlexGrid1);
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "frmMain";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sitzplan";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.c1FlexGrid1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridSaal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridVeranstaltungen)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -142,11 +193,14 @@
         #endregion
 
         private C1.Win.C1FlexGrid.C1FlexGrid c1FlexGrid1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        public System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button btnSaalAdd;
+        private System.Windows.Forms.Button btnSaalEdit;
+        private System.Windows.Forms.Button btnSaalDelete;
+        public C1.Win.C1FlexGrid.C1FlexGrid gridSaal;
+        public C1.Win.C1FlexGrid.C1FlexGrid gridVeranstaltungen;
+        private System.Windows.Forms.Button btnVeranstaltungAdd;
+        private System.Windows.Forms.Button btnVeranstaltungEdit;
+        private System.Windows.Forms.Button btnVeranstaltundDelete;
     }
 }
 

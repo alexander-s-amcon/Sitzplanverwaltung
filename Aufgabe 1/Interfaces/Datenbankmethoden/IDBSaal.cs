@@ -12,7 +12,6 @@ namespace Aufgabe_1.Interfaces.Datenbankmethoden
         void AddSaal(Saele saal);
         void EditSaal(Saele saal);
         void DeleteSaal(Saele saal);
-
     }
 
 

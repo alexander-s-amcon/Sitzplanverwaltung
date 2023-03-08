@@ -36,10 +36,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="C1.Win.4, Version=4.0.20222.566, Culture=neutral, PublicKeyToken=944ae1ea0e47ca04" />
     <Reference Include="C1.Win.4.5.2, Version=4.5.20222.566, Culture=neutral, PublicKeyToken=944ae1ea0e47ca04" />
     <Reference Include="C1.Win.C1FlexGrid.4, Version=4.0.20222.566, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
+    <Reference Include="C1.Win.C1Input.4, Version=4.0.20222.566, Culture=neutral, PublicKeyToken=7e7ff60f0c214f9a" />
     <Reference Include="C1.Win.C1TrueDBGrid.4, Version=4.0.20222.566, Culture=neutral, PublicKeyToken=75ae3fb0e2b1e0da, processorArchitecture=MSIL" />
     <Reference Include="C1.Win.C1TrueDBGrid.4.5.2, Version=4.5.20222.566, Culture=neutral, PublicKeyToken=75ae3fb0e2b1e0da, processorArchitecture=MSIL" />
+    <Reference Include="C1.Win.Calendar.4, Version=4.0.20222.566, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
     <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapper.2.0.123\lib\net461\Dapper.dll</HintPath>
     </Reference>
@@ -63,7 +66,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Datenbankmethoden\DBSaal.cs" />
+    <Compile Include="Datenbankmethoden\DBVeranstaltung.cs" />
     <Compile Include="Interfaces\Datenbankmethoden\IDBSaal.cs" />
+    <Compile Include="Interfaces\Datenbankmethoden\IDBVeranstaltung.cs" />
+    <Compile Include="Model\Veranstaltungen.cs" />
     <Compile Include="View\frmEvent.cs">
       <SubType>Form</SubType>
     </Compile>
