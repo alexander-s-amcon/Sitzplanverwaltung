@@ -13,5 +13,7 @@ namespace Aufgabe_1.Interfaces.Datenbankmethoden
         void AddVeranstaltung(Veranstaltungen veranstaltung);
         void EditVeranstaltung(Veranstaltungen veranstaltung);
         void DeleteVeranstaltung(Veranstaltungen veranstaltung);
+        void UpdateVeranstaltung(Veranstaltungen veranstaltung);
+        void CreateVeranstaltungen();
     }
 }

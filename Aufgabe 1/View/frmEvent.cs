@@ -28,22 +28,21 @@ namespace Aufgabe_1
             textBox1.Text = veranstaltung.Name;
             IDBSaal dBSaal = new DBSaal();
             List<Saele> saalliste = dBSaal.LadeSaal();
+            saalliste = saalliste.OrderBy(x => x.Saalname).ToList();
             comboBox1.DataSource = saalliste;
             comboBox1.DisplayMember = "Saalname";
             ShowDialog();
-            frmMain.test = 13;
 
             if (erfolg == true)
             {
                 veranstaltung.Name = textBox1.Text;
                 veranstaltung.Saal = comboBox1.Text;
-                string datumVon = dateTimePicker1.Value.ToShortDateString();
-                veranstaltung.DatumVon = datumVon;
-                string datumBis = dateTimePicker2.Value.ToShortDateString();
-                veranstaltung.DatumBis = datumBis;
+                string datum = dateTimePicker1.Value.ToShortDateString();
+                veranstaltung.Datum = datum;
+                string bis = dateTimePicker2.Value.ToShortDateString();
+                veranstaltung.Bis = bis;
             }
             return erfolg;
-            
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -55,6 +54,11 @@ namespace Aufgabe_1
         private void btnOk_Click(object sender, EventArgs e)
         {
             erfolg = true;
+
+            if (textBox1.Text == "") 
+            {
+                erfolg = false;
+            }
             this.Close();
         }
     }

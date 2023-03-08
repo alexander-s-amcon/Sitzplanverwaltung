@@ -14,6 +14,7 @@ namespace Aufgabe_1
 {
     public partial class frmSaal : Form
     {
+
         private bool erfolg;
 
         public frmSaal()
@@ -25,6 +26,7 @@ namespace Aufgabe_1
         public bool Zeige(ref Saele saal)
         {
             textBox1.Text = saal.Saalname;
+
             numericUpDown1.Value = saal.Reihen;
             numericUpDown2.Value = saal.Sitzplaetze;
             ShowDialog();
@@ -32,8 +34,8 @@ namespace Aufgabe_1
             if (erfolg == true)
             {
                 saal.Saalname = textBox1.Text;
-                saal.Reihen = Convert.ToInt32(numericUpDown1.Value);
-                saal.Sitzplaetze = Convert.ToInt32(numericUpDown2.Value);
+                saal.Reihen = Convert.ToInt32(numericUpDown1.Value+1);
+                saal.Sitzplaetze = Convert.ToInt32(numericUpDown2.Value+1);
             }
             return erfolg;
         }
@@ -48,5 +50,7 @@ namespace Aufgabe_1
             erfolg = false;
             this.Close();
         }
+
+
     }
 }

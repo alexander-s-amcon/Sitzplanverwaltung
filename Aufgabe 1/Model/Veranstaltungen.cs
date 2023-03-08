@@ -11,8 +11,8 @@ namespace Aufgabe_1.Model
         public int Id { get; set; }
         public string Name { get; set; }
         public string Saal { get; set; }
-        public string DatumVon { get; set; }
-        public string DatumBis { get; set; }
+        public string Datum { get; set; }
+        public string Bis { get; set; }
 
     }
 }

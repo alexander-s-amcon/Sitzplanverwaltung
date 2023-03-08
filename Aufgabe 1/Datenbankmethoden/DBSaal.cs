@@ -3,6 +3,7 @@ using Aufgabe_1.Model;
 using C1.Win.C1FlexGrid;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Data.SQLite;
 using System.Linq;
 using System.Net.Http.Headers;
@@ -19,6 +20,17 @@ namespace Aufgabe_1.Datenbankmethoden
         public DBSaal()
         {
             db_Connection.ConnectionString = connectionString;
+        }
+
+        public void CreateSaal()
+        {
+            db_Connection.Open();
+            SQLiteCommand sql_Command = new SQLiteCommand();
+            sql_Command = db_Connection.CreateCommand();
+            sql_Command.CommandText = $"CREATE TABLE IF NOT EXISTS Saele(Id INTEGER PRIMARY KEY AUTOINCREMENT, Saalname TEXT, Reihen INTEGER, Sitzplaetze INTEGER)";
+            sql_Command.ExecuteNonQuery();
+            sql_Command.Dispose();
+            db_Connection.Close();
         }
 
         public void AddSaal(Saele saal)

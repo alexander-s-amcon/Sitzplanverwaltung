@@ -18,7 +18,6 @@ namespace Aufgabe_1.Datenbankmethoden
         int sitzplaetze;
         const string connectionString = "Data Source = Datenbank.sqlite;";
         private SQLiteConnection db_Connection = new SQLiteConnection();
-        string Saalname;
         public DBVeranstaltung()
         {
             db_Connection.ConnectionString = connectionString;
@@ -29,7 +28,7 @@ namespace Aufgabe_1.Datenbankmethoden
             db_Connection.Open();
             SQLiteCommand sql_Command = new SQLiteCommand();
             sql_Command = db_Connection.CreateCommand();
-            sql_Command.CommandText = $"INSERT INTO Veranstaltungen(Name, Saal, Datum) VALUES ('{veranstaltung.Name}','{veranstaltung.Saal}','{veranstaltung.DatumVon + " - " + veranstaltung.DatumBis}')";
+            sql_Command.CommandText = $"INSERT INTO Veranstaltungen(Name, Saal, Datum, Bis) VALUES ('{veranstaltung.Name}','{veranstaltung.Saal}','{veranstaltung.Datum}','{veranstaltung.Bis}')";
             sql_Command.ExecuteNonQuery();
             sql_Command.CommandText = $"CREATE TABLE '{veranstaltung.Name}'(Id INTEGER PRIMARY KEY AUTOINCREMENT, Reihe INTEGER, Sitzplatz INTEGER, Zustand TEXT)";
             sql_Command.ExecuteNonQuery();
@@ -48,7 +47,7 @@ namespace Aufgabe_1.Datenbankmethoden
             {
                 for (int cols = 1; cols < sitzplaetze; cols++)
                 {
-                    sql_Command.CommandText = $"INSERT INTO {veranstaltung.Name} (Reihe, Sitzplatz, Zustand) VALUES ('{rows} ', '{cols}', '')";
+                    sql_Command.CommandText = $"INSERT INTO [{veranstaltung.Name}] (Reihe, Sitzplatz, Zustand) VALUES ('{rows} ', '{cols}', '')";
                     sql_Command.ExecuteNonQuery();
                 }
             }
@@ -72,7 +71,7 @@ namespace Aufgabe_1.Datenbankmethoden
             db_Connection.Open();
             SQLiteCommand sql_Command = new SQLiteCommand();
             sql_Command = db_Connection.CreateCommand();
-            sql_Command.CommandText = $"UPDATE Veranstaltungen SET Name = '{veranstaltung.Name}', Saal = '{veranstaltung.Saal}', Datum = '{veranstaltung.DatumVon + " - " + veranstaltung.DatumBis}' WHERE Id = {veranstaltung.Id}";
+            sql_Command.CommandText = $"UPDATE Veranstaltungen SET Name = '{veranstaltung.Name}', Saal = '{veranstaltung.Saal}', Datum = '{veranstaltung.Datum}', Bis = '{veranstaltung.Bis}' WHERE Id = {veranstaltung.Id}";
             sql_Command.ExecuteNonQuery();
             sql_Command.Dispose();
             db_Connection.Close();
@@ -95,13 +94,38 @@ namespace Aufgabe_1.Datenbankmethoden
                 veranstaltung.Id = reader.GetInt32(0);
                 veranstaltung.Name = reader.GetString(1);
                 veranstaltung.Saal = reader.GetString(2);
-                veranstaltung.DatumVon = reader.GetString(3);
+                veranstaltung.Datum = reader.GetString(3);
+                veranstaltung.Bis = reader.GetString(4);
                 veranstaltungsliste.Add(veranstaltung);
             }
             sql_Command.Dispose();
             db_Connection.Close();
 
             return veranstaltungsliste;
+        }
+
+        public void UpdateVeranstaltung(Veranstaltungen veranstaltung)
+        {
+            IDBSaal dBSaal = new DBSaal();
+            Saele saal = new Saele();
+            db_Connection.Open();
+            SQLiteCommand sql_Command = new SQLiteCommand();
+            sql_Command = db_Connection.CreateCommand();
+            sql_Command.CommandText = $"UPDATE [{veranstaltung.Name}] SET Reihe = '{saal.Reihen}', Sitzplatz = {saal.Sitzplaetze} WHERE Id = {saal.Id}";
+            sql_Command.ExecuteNonQuery();
+            sql_Command.Dispose();
+            db_Connection.Close();
+        }
+
+        public void CreateVeranstaltungen()
+        {
+            db_Connection.Open();
+            SQLiteCommand sql_Command = new SQLiteCommand();
+            sql_Command = db_Connection.CreateCommand();
+            sql_Command.CommandText = $"CREATE TABLE IF NOT EXISTS Veranstaltungen(Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Saal TEXT, Datum TEXT, Bis TEXT)";
+            sql_Command.ExecuteNonQuery();
+            sql_Command.Dispose();
+            db_Connection.Close();
         }
     }
 }
