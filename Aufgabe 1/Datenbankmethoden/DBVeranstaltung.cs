@@ -1,5 +1,7 @@
 ﻿using Aufgabe_1.Interfaces.Datenbankmethoden;
 using Aufgabe_1.Model;
+using C1.Win.C1FlexGrid;
+using C1.Win.C1TrueDBGrid;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -28,7 +30,7 @@ namespace Aufgabe_1.Datenbankmethoden
             db_Connection.Open();
             SQLiteCommand sql_Command = new SQLiteCommand();
             sql_Command = db_Connection.CreateCommand();
-            sql_Command.CommandText = $"INSERT INTO Veranstaltungen(Name, Saal, Datum, Bis) VALUES ('{veranstaltung.Name}','{veranstaltung.Saal}','{veranstaltung.Datum}','{veranstaltung.Bis}')";
+            sql_Command.CommandText = $"INSERT INTO Veranstaltungen(Name, Saal, Datum, Bis) VALUES ('{veranstaltung.Name}','{veranstaltung.Saal}','{veranstaltung.DatumVon}','{veranstaltung.DatumBis}')";
             sql_Command.ExecuteNonQuery();
             sql_Command.CommandText = $"CREATE TABLE '{veranstaltung.Name}'(Id INTEGER PRIMARY KEY AUTOINCREMENT, Reihe INTEGER, Sitzplatz INTEGER, Zustand TEXT)";
             sql_Command.ExecuteNonQuery();
@@ -71,8 +73,12 @@ namespace Aufgabe_1.Datenbankmethoden
             db_Connection.Open();
             SQLiteCommand sql_Command = new SQLiteCommand();
             sql_Command = db_Connection.CreateCommand();
-            sql_Command.CommandText = $"UPDATE Veranstaltungen SET Name = '{veranstaltung.Name}', Saal = '{veranstaltung.Saal}', Datum = '{veranstaltung.Datum}', Bis = '{veranstaltung.Bis}' WHERE Id = {veranstaltung.Id}";
+            sql_Command.CommandText = $"SELECT Name FROM Veranstaltungen WHERE Id = {veranstaltung.Id}";
+            string eventname = sql_Command.ExecuteScalar().ToString();
+            sql_Command.CommandText = $"UPDATE Veranstaltungen SET Name = '{veranstaltung.Name}', Saal = '{veranstaltung.Saal}', Datum = '{veranstaltung.DatumVon}', Bis = '{veranstaltung.DatumBis}' WHERE Id = {veranstaltung.Id}";
             sql_Command.ExecuteNonQuery();
+            sql_Command.CommandText = $"ALTER TABLE '{eventname}' RENAME TO '{veranstaltung.Name}'";
+            sql_Command.ExecuteNonQuery(); 
             sql_Command.Dispose();
             db_Connection.Close();
             return;
@@ -94,8 +100,8 @@ namespace Aufgabe_1.Datenbankmethoden
                 veranstaltung.Id = reader.GetInt32(0);
                 veranstaltung.Name = reader.GetString(1);
                 veranstaltung.Saal = reader.GetString(2);
-                veranstaltung.Datum = reader.GetString(3);
-                veranstaltung.Bis = reader.GetString(4);
+                veranstaltung.DatumVon = reader.GetDateTime(3);
+                veranstaltung.DatumBis = reader.GetDateTime(4);
                 veranstaltungsliste.Add(veranstaltung);
             }
             sql_Command.Dispose();

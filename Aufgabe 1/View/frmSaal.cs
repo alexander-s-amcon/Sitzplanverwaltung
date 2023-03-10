@@ -50,7 +50,5 @@ namespace Aufgabe_1
             erfolg = false;
             this.Close();
         }
-
-
     }
 }

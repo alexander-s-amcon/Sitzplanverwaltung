@@ -22,6 +22,8 @@ namespace Aufgabe_1
         private SQLiteConnection db_Connection = null;
         public CellStyle WhiteCellStyle;
         public int test;
+        int Reihen;
+        int Sitzplaetze;
         int reihen;
         int sitzplaetze;
         private string EventName;
@@ -29,6 +31,10 @@ namespace Aufgabe_1
         public frmMain()
         {
             InitializeComponent();
+            btnVeranstaltungEdit.Enabled = false;
+            btnVeranstaltundDelete.Enabled = false;
+            btnSaalDelete.Enabled = false;
+            btnSaalEdit.Enabled = false;
             gridSaal.AllowEditing = false;
             gridSaal.Rows.Fixed = 0;
             gridSaal.Cols.Fixed = 0;
@@ -106,18 +112,22 @@ namespace Aufgabe_1
                 veranstaltung.Id = reader.GetInt32(0);
                 veranstaltung.Name = reader.GetString(1);
                 veranstaltung.Saal = reader.GetString(2);
-                veranstaltung.Datum = reader.GetString(3);
-                veranstaltung.Bis = reader.GetString(4);
+                veranstaltung.DatumVon = Convert.ToDateTime(reader.GetString(3));
+                veranstaltung.DatumBis = Convert.ToDateTime(reader.GetString(4));
                 veranstaltungsliste.Add(veranstaltung);
             }
             sql_Command.Dispose();
             db_Connection.Close();
             gridVeranstaltungen.DataSource = veranstaltungsliste;
+            gridVeranstaltungen.Cols[4].Format = "dd/MM/yyyy HH:mm";
+            gridVeranstaltungen.Cols[5].Format = "dd/MM/yyyy HH:mm";
             gridVeranstaltungen.Cols[0].Visible = false;
             gridVeranstaltungen.Cols[1].Visible = false;
             gridVeranstaltungen.Cols[3].Visible = false;
-            gridVeranstaltungen.Cols[3].Width = 50;
-            gridVeranstaltungen.Cols[4].Width = 85;
+            gridVeranstaltungen.Cols[2].Width = 150;
+            gridVeranstaltungen.Cols[4].Width = 150;
+            gridVeranstaltungen.Cols[5].Width = 150;
+
         }
 
         public void LadeDatenbankeintraege()
@@ -313,15 +323,45 @@ namespace Aufgabe_1
             if (isClicked == true)
             {
                 dBSaal.EditSaal(saal);
+                db_Connection.Open();
+                SQLiteCommand sql_Command = new SQLiteCommand();
+                sql_Command = db_Connection.CreateCommand();
+                sql_Command.CommandText = $"SELECT * FROM Veranstaltungen WHERE Saal = '{saal.Saalname}'";
+                SQLiteDataReader reader = sql_Command.ExecuteReader();
+                List<string> list = new List<string>();
+                while (reader.Read())
+                {
+                    string Saal = reader.GetString(1);
+                    list.Add(Saal);
+                }
+                reader.Close();
+                sql_Command.CommandText = $"SELECT Reihen, Sitzplaetze FROM Saele WHERE Saalname = '{saal.Saalname}'";
+                SQLiteDataReader reader2 = sql_Command.ExecuteReader();
+                while (reader2.Read())
+                {
+                    Reihen = (int)reader2.GetInt32(0);
+                    Sitzplaetze = (int)reader2.GetInt32(1);
+                }
+                reader2.Close();
+                foreach (object obj in list)
+                {
+                    sql_Command.CommandText = $"DELETE FROM '{obj}'";
+                    sql_Command.ExecuteNonQuery();
+                    for (int rows = 1; rows < Reihen; rows++)
+                    {
+                        for (int cols = 1; cols < Sitzplaetze; cols++)
+                        {
+                            sql_Command.CommandText = $"INSERT INTO [{obj}] (Reihe, Sitzplatz, Zustand) VALUES ('{rows} ', '{cols}', '')";
+                            sql_Command.ExecuteNonQuery();
+                        }
+                    }
+                }
+                sql_Command.Dispose();
+                db_Connection.Close();
+                LadeFlexgrid();
+                LadeDatenbankeintraege();
+                LadeSaele();
             }
-
-            List<string> list = new List<string>();
-
-            !SQLiteDataReader reader = 
-
-
-            LadeSaele();
-            LadeVeranstaltungen();
         }
 
         private void btnSaalDelete_Click(object sender, EventArgs e)
@@ -338,6 +378,8 @@ namespace Aufgabe_1
 
         private void gridSaal_Click(object sender, EventArgs e)
         {
+            btnSaalDelete.Enabled = true;
+            btnSaalEdit.Enabled = true;
             LadeVeranstaltungen();
         }
 
@@ -351,7 +393,6 @@ namespace Aufgabe_1
             {
                 dBVeranstaltung.AddVeranstaltung(veranstaltung);
             }
-
             LadeVeranstaltungen();
         }
 
@@ -364,13 +405,14 @@ namespace Aufgabe_1
             veranstaltung.Id = (int)gridVeranstaltungen.GetData(rowsel, 1);
             veranstaltung.Name = (string)gridVeranstaltungen.GetData(rowsel, 2);
             veranstaltung.Saal = (string)gridVeranstaltungen.GetData(rowsel, 3);
-            veranstaltung.Datum = (string)gridVeranstaltungen.GetData(rowsel, 4);
-            veranstaltung.Bis = (string)gridVeranstaltungen.GetData(rowsel, 5);
+            veranstaltung.DatumVon = (DateTime)gridVeranstaltungen.GetData(rowsel, 4);
+            veranstaltung.DatumBis = (DateTime)gridVeranstaltungen.GetData(rowsel, 5);
             bool isClicked = frmEvent.Zeige(ref veranstaltung);
             if (isClicked == true)
             {
                 dBVeranstaltung.EditVeranstaltung(veranstaltung);
             }
+
             LadeVeranstaltungen();
         }
 
@@ -396,6 +438,8 @@ namespace Aufgabe_1
 
         private void gridVeranstaltungen_Click(object sender, EventArgs e)
         {
+            btnVeranstaltungEdit.Enabled = true;
+            btnVeranstaltundDelete.Enabled = true;
             LadeFlexgrid();
             LadeDatenbankeintraege();
         }
