@@ -76,6 +76,12 @@
     <Compile Include="View\frmEvent.Designer.cs">
       <DependentUpon>frmEvent.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\frmPlatzsuche.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmPlatzsuche.Designer.cs">
+      <DependentUpon>frmPlatzsuche.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\frmSaal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +101,9 @@
     <Compile Include="Model\Tables.cs" />
     <EmbeddedResource Include="View\frmEvent.resx">
       <DependentUpon>frmEvent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmPlatzsuche.resx">
+      <DependentUpon>frmPlatzsuche.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\frmSaal.resx">
       <DependentUpon>frmSaal.cs</DependentUpon>

@@ -54,9 +54,9 @@ namespace Aufgabe_1
                 veranstaltung.Name = textBox1.Text;
                 veranstaltung.Saal = comboBox1.Text;
                 datum = Convert.ToDateTime(dateTimePicker1.Value);
-                veranstaltung.DatumVon = datum;
+                veranstaltung.von = datum;
                 bis = Convert.ToDateTime(dateTimePicker2.Value);
-                veranstaltung.DatumBis = bis;
+                veranstaltung.bis = bis;
             }
             return erfolg;
         }
@@ -93,7 +93,7 @@ namespace Aufgabe_1
                 {
                     foreach (DateTime bis in biss)
                     {
-                        if (dtm > dtm1 && dtm2 < bis)
+                        if (dtm < dtm1 && dtm2 < bis)
                         {
                             MessageBox.Show("Es ist bereits eine Veranstaltung für diesen Zeitpunkt geplant.");
                             erfolg = false;

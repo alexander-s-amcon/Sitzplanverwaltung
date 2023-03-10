@@ -13,6 +13,7 @@ using System.Web.UI.Design;
 using Aufgabe_1.Model;
 using System.Data.SqlClient;
 using C1.Framework;
+using Aufgabe_1.View;
 
 namespace Aufgabe_1
 {
@@ -21,7 +22,6 @@ namespace Aufgabe_1
         const string connectionString = "Data Source = Datenbank.sqlite;";
         private SQLiteConnection db_Connection = null;
         public CellStyle WhiteCellStyle;
-        public int test;
         int Reihen;
         int Sitzplaetze;
         int reihen;
@@ -35,6 +35,7 @@ namespace Aufgabe_1
             btnVeranstaltundDelete.Enabled = false;
             btnSaalDelete.Enabled = false;
             btnSaalEdit.Enabled = false;
+            button1.Enabled = false;
             gridSaal.AllowEditing = false;
             gridSaal.Rows.Fixed = 0;
             gridSaal.Cols.Fixed = 0;
@@ -112,8 +113,8 @@ namespace Aufgabe_1
                 veranstaltung.Id = reader.GetInt32(0);
                 veranstaltung.Name = reader.GetString(1);
                 veranstaltung.Saal = reader.GetString(2);
-                veranstaltung.DatumVon = Convert.ToDateTime(reader.GetString(3));
-                veranstaltung.DatumBis = Convert.ToDateTime(reader.GetString(4));
+                veranstaltung.von = Convert.ToDateTime(reader.GetString(3));
+                veranstaltung.bis = Convert.ToDateTime(reader.GetString(4));
                 veranstaltungsliste.Add(veranstaltung);
             }
             sql_Command.Dispose();
@@ -405,8 +406,8 @@ namespace Aufgabe_1
             veranstaltung.Id = (int)gridVeranstaltungen.GetData(rowsel, 1);
             veranstaltung.Name = (string)gridVeranstaltungen.GetData(rowsel, 2);
             veranstaltung.Saal = (string)gridVeranstaltungen.GetData(rowsel, 3);
-            veranstaltung.DatumVon = (DateTime)gridVeranstaltungen.GetData(rowsel, 4);
-            veranstaltung.DatumBis = (DateTime)gridVeranstaltungen.GetData(rowsel, 5);
+            veranstaltung.von = (DateTime)gridVeranstaltungen.GetData(rowsel, 4);
+            veranstaltung.bis = (DateTime)gridVeranstaltungen.GetData(rowsel, 5);
             bool isClicked = frmEvent.Zeige(ref veranstaltung);
             if (isClicked == true)
             {
@@ -440,8 +441,15 @@ namespace Aufgabe_1
         {
             btnVeranstaltungEdit.Enabled = true;
             btnVeranstaltundDelete.Enabled = true;
+            button1.Enabled = true;
             LadeFlexgrid();
             LadeDatenbankeintraege();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            frmPlatzsuche frmPlatzsuche = new frmPlatzsuche();
+            frmPlatzsuche.ShowDialog();
         }
     }
 }

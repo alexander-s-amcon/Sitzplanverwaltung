@@ -38,6 +38,7 @@
             this.btnVeranstaltungAdd = new System.Windows.Forms.Button();
             this.btnVeranstaltungEdit = new System.Windows.Forms.Button();
             this.btnVeranstaltundDelete = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.c1FlexGrid1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridSaal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridVeranstaltungen)).BeginInit();
@@ -49,7 +50,7 @@
             this.c1FlexGrid1.ColumnInfo = resources.GetString("c1FlexGrid1.ColumnInfo");
             this.c1FlexGrid1.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.c1FlexGrid1.HighLight = C1.Win.C1FlexGrid.HighLightEnum.WithFocus;
-            this.c1FlexGrid1.Location = new System.Drawing.Point(12, 281);
+            this.c1FlexGrid1.Location = new System.Drawing.Point(12, 215);
             this.c1FlexGrid1.Name = "c1FlexGrid1";
             this.c1FlexGrid1.Rows.Count = 11;
             this.c1FlexGrid1.SelectionMode = C1.Win.C1FlexGrid.SelectionModeEnum.Cell;
@@ -62,11 +63,11 @@
             // 
             this.btnSaalAdd.BackColor = System.Drawing.Color.White;
             this.btnSaalAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSaalAdd.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaalAdd.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSaalAdd.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnSaalAdd.Location = new System.Drawing.Point(12, 12);
             this.btnSaalAdd.Name = "btnSaalAdd";
-            this.btnSaalAdd.Size = new System.Drawing.Size(175, 72);
+            this.btnSaalAdd.Size = new System.Drawing.Size(175, 50);
             this.btnSaalAdd.TabIndex = 1;
             this.btnSaalAdd.Text = "Saal hinzufügen";
             this.btnSaalAdd.UseVisualStyleBackColor = false;
@@ -76,11 +77,11 @@
             // 
             this.btnSaalEdit.BackColor = System.Drawing.Color.White;
             this.btnSaalEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSaalEdit.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaalEdit.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSaalEdit.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnSaalEdit.Location = new System.Drawing.Point(12, 102);
+            this.btnSaalEdit.Location = new System.Drawing.Point(12, 77);
             this.btnSaalEdit.Name = "btnSaalEdit";
-            this.btnSaalEdit.Size = new System.Drawing.Size(175, 72);
+            this.btnSaalEdit.Size = new System.Drawing.Size(175, 50);
             this.btnSaalEdit.TabIndex = 2;
             this.btnSaalEdit.Text = "Saal bearbeiten";
             this.btnSaalEdit.UseVisualStyleBackColor = false;
@@ -90,11 +91,11 @@
             // 
             this.btnSaalDelete.BackColor = System.Drawing.Color.White;
             this.btnSaalDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSaalDelete.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaalDelete.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSaalDelete.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnSaalDelete.Location = new System.Drawing.Point(12, 190);
+            this.btnSaalDelete.Location = new System.Drawing.Point(12, 141);
             this.btnSaalDelete.Name = "btnSaalDelete";
-            this.btnSaalDelete.Size = new System.Drawing.Size(175, 72);
+            this.btnSaalDelete.Size = new System.Drawing.Size(175, 50);
             this.btnSaalDelete.TabIndex = 3;
             this.btnSaalDelete.Text = "Saal löschen";
             this.btnSaalDelete.UseVisualStyleBackColor = false;
@@ -109,7 +110,7 @@
             this.gridSaal.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridSaal.Location = new System.Drawing.Point(203, 12);
             this.gridSaal.Name = "gridSaal";
-            this.gridSaal.Size = new System.Drawing.Size(139, 250);
+            this.gridSaal.Size = new System.Drawing.Size(139, 179);
             this.gridSaal.StyleInfo = resources.GetString("gridSaal.StyleInfo");
             this.gridSaal.TabIndex = 8;
             this.gridSaal.TabStop = false;
@@ -124,7 +125,7 @@
             this.gridVeranstaltungen.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridVeranstaltungen.Location = new System.Drawing.Point(348, 12);
             this.gridVeranstaltungen.Name = "gridVeranstaltungen";
-            this.gridVeranstaltungen.Size = new System.Drawing.Size(433, 250);
+            this.gridVeranstaltungen.Size = new System.Drawing.Size(433, 179);
             this.gridVeranstaltungen.StyleInfo = resources.GetString("gridVeranstaltungen.StyleInfo");
             this.gridVeranstaltungen.TabIndex = 8;
             this.gridVeranstaltungen.TabStop = false;
@@ -135,10 +136,10 @@
             this.btnVeranstaltungAdd.BackColor = System.Drawing.Color.White;
             this.btnVeranstaltungAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnVeranstaltungAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVeranstaltungAdd.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVeranstaltungAdd.Location = new System.Drawing.Point(606, 281);
+            this.btnVeranstaltungAdd.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVeranstaltungAdd.Location = new System.Drawing.Point(604, 215);
             this.btnVeranstaltungAdd.Name = "btnVeranstaltungAdd";
-            this.btnVeranstaltungAdd.Size = new System.Drawing.Size(175, 72);
+            this.btnVeranstaltungAdd.Size = new System.Drawing.Size(175, 50);
             this.btnVeranstaltungAdd.TabIndex = 4;
             this.btnVeranstaltungAdd.Text = "Veranstaltung planen";
             this.btnVeranstaltungAdd.UseVisualStyleBackColor = false;
@@ -149,10 +150,10 @@
             this.btnVeranstaltungEdit.BackColor = System.Drawing.Color.White;
             this.btnVeranstaltungEdit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnVeranstaltungEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVeranstaltungEdit.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVeranstaltungEdit.Location = new System.Drawing.Point(606, 369);
+            this.btnVeranstaltungEdit.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVeranstaltungEdit.Location = new System.Drawing.Point(604, 281);
             this.btnVeranstaltungEdit.Name = "btnVeranstaltungEdit";
-            this.btnVeranstaltungEdit.Size = new System.Drawing.Size(175, 72);
+            this.btnVeranstaltungEdit.Size = new System.Drawing.Size(175, 50);
             this.btnVeranstaltungEdit.TabIndex = 5;
             this.btnVeranstaltungEdit.Text = "Veranstaltung bearbeiten";
             this.btnVeranstaltungEdit.UseVisualStyleBackColor = false;
@@ -163,20 +164,34 @@
             this.btnVeranstaltundDelete.BackColor = System.Drawing.Color.White;
             this.btnVeranstaltundDelete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnVeranstaltundDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVeranstaltundDelete.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVeranstaltundDelete.Location = new System.Drawing.Point(606, 459);
+            this.btnVeranstaltundDelete.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVeranstaltundDelete.Location = new System.Drawing.Point(604, 349);
             this.btnVeranstaltundDelete.Name = "btnVeranstaltundDelete";
-            this.btnVeranstaltundDelete.Size = new System.Drawing.Size(175, 72);
+            this.btnVeranstaltundDelete.Size = new System.Drawing.Size(175, 50);
             this.btnVeranstaltundDelete.TabIndex = 6;
             this.btnVeranstaltundDelete.Text = "Veranstaltung löschen";
             this.btnVeranstaltundDelete.UseVisualStyleBackColor = false;
             this.btnVeranstaltundDelete.Click += new System.EventHandler(this.btnVeranstaltundDelete_Click);
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.White;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(604, 415);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(175, 50);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "Tickets buchen";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(798, 543);
+            this.ClientSize = new System.Drawing.Size(791, 478);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnVeranstaltundDelete);
             this.Controls.Add(this.btnVeranstaltungEdit);
             this.Controls.Add(this.btnVeranstaltungAdd);
@@ -210,6 +225,7 @@
         private System.Windows.Forms.Button btnVeranstaltungAdd;
         private System.Windows.Forms.Button btnVeranstaltungEdit;
         private System.Windows.Forms.Button btnVeranstaltundDelete;
+        private System.Windows.Forms.Button button1;
     }
 }
 
