@@ -14,6 +14,7 @@ using Aufgabe_1.Model;
 using System.Data.SqlClient;
 using C1.Framework;
 using Aufgabe_1.View;
+using System.Drawing.Text;
 
 namespace Aufgabe_1
 {
@@ -26,7 +27,7 @@ namespace Aufgabe_1
         int Sitzplaetze;
         int reihen;
         int sitzplaetze;
-        private string EventName;
+        public string EventName { get; set; }
         private List<Sitzplatz> _sitzplatzliste;
         public frmMain()
         {
@@ -448,7 +449,7 @@ namespace Aufgabe_1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            frmPlatzsuche frmPlatzsuche = new frmPlatzsuche();
+            frmPlatzsuche frmPlatzsuche = new frmPlatzsuche(EventName, reihen , sitzplaetze);
             frmPlatzsuche.ShowDialog();
         }
     }

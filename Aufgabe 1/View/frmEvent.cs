@@ -26,7 +26,6 @@ namespace Aufgabe_1
         public frmEvent()
         {
             InitializeComponent();
-            frmMain frmMain = new frmMain();
             db_Connection = new SQLiteConnection();
             db_Connection.ConnectionString = connectionString;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;

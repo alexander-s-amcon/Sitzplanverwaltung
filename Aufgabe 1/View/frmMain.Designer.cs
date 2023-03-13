@@ -215,8 +215,6 @@
         }
 
         #endregion
-
-        private C1.Win.C1FlexGrid.C1FlexGrid c1FlexGrid1;
         private System.Windows.Forms.Button btnSaalAdd;
         private System.Windows.Forms.Button btnSaalEdit;
         private System.Windows.Forms.Button btnSaalDelete;
@@ -226,6 +224,7 @@
         private System.Windows.Forms.Button btnVeranstaltungEdit;
         private System.Windows.Forms.Button btnVeranstaltundDelete;
         private System.Windows.Forms.Button button1;
+        public C1.Win.C1FlexGrid.C1FlexGrid c1FlexGrid1;
     }
 }
 
