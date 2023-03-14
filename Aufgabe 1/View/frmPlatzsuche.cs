@@ -31,6 +31,7 @@ namespace Aufgabe_1.View
             InitializeComponent();
             gridPlatzsuche.Styles.Normal.Border.Style = BorderStyleEnum.Flat;
             gridPlatzsuche.Styles.Normal.Border.Color = Color.DarkGray;
+            nudTickets.Value = 1;
             eventname = EventName;
             db_Connection = new SQLiteConnection();
             db_Connection.ConnectionString = connectionString;
@@ -121,20 +122,92 @@ namespace Aufgabe_1.View
         {
             CellStyle c1 = gridPlatzsuche.Styles.Add("Freier Platz");
             CellStyle c2 = gridPlatzsuche.Styles.Add("Ausgewählt");
+            CellStyle c3 = gridPlatzsuche.Styles.Add("Verfügbar");
+            CellStyle c4 = gridPlatzsuche.Styles.Add("Reserviert");
             c1.BackColor = Color.White;
             c2.BackColor = Color.Gold;
-            int reihe;
-            int sitzplatz;
+            c3.BackColor = Color.LightGreen;
+            c4.BackColor = Color.Gray;
             int tickets = (int)nudTickets.Value;
 
+            if (cbZusammen.Checked == false)
+            {
+                int mid = sitzplaetze / 2;
+                int right = mid + 1;
+                int left = mid - 1;
+                bool erfolg = false;
+                if (tickets > 0)
+                {
+                    for (int a = 0; a < tickets; a++)
+                    {
+                        erfolg = false;
+                        for (int rows = 1; rows < gridPlatzsuche.Rows.Count; rows++)
+                        {
+                            for (int cols = 1; cols < gridPlatzsuche.Cols.Count; cols++)
+                            {
+                                if (gridPlatzsuche.GetCellStyle(rows, mid).BackColor == Color.White)
+                                {
+                                    gridPlatzsuche.SetCellStyle(rows, mid, c2);
+                                    erfolg = true;
+                                    break;
+                                }
+                                else
+                                {
+                                    if (left <= 0 && right >= sitzplaetze)
+                                    {
+                                        break;
+                                    }
+
+                                    if ((right - mid) * (right - mid) <= (left - mid) * (left - mid))
+                                    {
+                                        if (gridPlatzsuche.GetCellStyle(rows, right).BackColor == Color.White)
+                                        {
+                                            gridPlatzsuche.SetCellStyle(rows, right, c2);
+                                            erfolg = true;
+                                            right++;
+                                            break;
+                                        }
+                                        else if (gridPlatzsuche.GetCellStyle(rows, right).BackColor == Color.Gray)
+                                        {
+                                            gridPlatzsuche.SetCellStyle(rows, right + 1, c2);
+                                            erfolg = true;
+                                            right = right + 2;
+                                            break;
+                                        }
+                                    }
+
+                                    if ((right - mid) * (right - mid) > (left - mid) * (left - mid))
+                                    {
+
+                                        if (gridPlatzsuche.GetCellStyle(rows, left).BackColor == Color.White)
+                                        {
+                                            gridPlatzsuche.SetCellStyle(rows, left, c2);
+                                            erfolg = true;
+                                            left--;
+                                            break;
+                                        }
+
+                                        else if (gridPlatzsuche.GetCellStyle(rows, left).BackColor == Color.Gray)
+                                        {
+                                            gridPlatzsuche.SetCellStyle(rows, left - 1, c2);
+                                            erfolg = true;
+                                            left = left - 2;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                            if (erfolg == true)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
             if (cbZusammen.Checked == true)
             {
-                if (gridPlatzsuche.GetCellStyle(2, 2).BackColor == Color.White && gridPlatzsuche.GetCellStyle(2, 3).BackColor == Color.White && gridPlatzsuche.GetCellStyle(2, 4).BackColor == Color.White)
-                {
-                    gridPlatzsuche.SetCellStyle(2, 2, c2);
-                    gridPlatzsuche.SetCellStyle(2, 3, c2);
-                    gridPlatzsuche.SetCellStyle(2, 4, c2);
-                }
+
             }
         }
 
@@ -181,6 +254,11 @@ namespace Aufgabe_1.View
         private void btnAbbrechen_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void frmPlatzsuche_Load(object sender, EventArgs e)
+        {
+            LadeDatenbankeintraege();
         }
     }
 }

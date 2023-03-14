@@ -137,6 +137,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frmPlatzsuche";
+            this.Load += new System.EventHandler(this.frmPlatzsuche_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gridPlatzsuche)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTickets)).EndInit();
             this.ResumeLayout(false);
