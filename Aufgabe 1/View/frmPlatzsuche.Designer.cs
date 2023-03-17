@@ -42,7 +42,12 @@
             // 
             // gridPlatzsuche
             // 
+            this.gridPlatzsuche.AllowDragging = C1.Win.C1FlexGrid.AllowDraggingEnum.None;
+            this.gridPlatzsuche.AllowEditing = false;
+            this.gridPlatzsuche.AllowResizing = C1.Win.C1FlexGrid.AllowResizingEnum.None;
+            this.gridPlatzsuche.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.None;
             this.gridPlatzsuche.ColumnInfo = "10,1,0,0,0,-1,Columns:";
+            this.gridPlatzsuche.HighLight = C1.Win.C1FlexGrid.HighLightEnum.Never;
             this.gridPlatzsuche.Location = new System.Drawing.Point(12, 94);
             this.gridPlatzsuche.Name = "gridPlatzsuche";
             this.gridPlatzsuche.SelectionMode = C1.Win.C1FlexGrid.SelectionModeEnum.Cell;
@@ -85,7 +90,6 @@
             // btnReservieren
             // 
             this.btnReservieren.BackColor = System.Drawing.Color.White;
-            this.btnReservieren.Enabled = false;
             this.btnReservieren.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReservieren.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReservieren.Location = new System.Drawing.Point(323, 466);
@@ -94,6 +98,7 @@
             this.btnReservieren.TabIndex = 4;
             this.btnReservieren.Text = "Reservieren";
             this.btnReservieren.UseVisualStyleBackColor = false;
+            this.btnReservieren.Click += new System.EventHandler(this.btnReservieren_Click);
             // 
             // btnAnzeigen
             // 

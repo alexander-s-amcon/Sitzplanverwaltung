@@ -98,7 +98,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\Saele.cs" />
     <Compile Include="Model\Sitzplatz.cs" />
-    <Compile Include="Model\Tables.cs" />
     <EmbeddedResource Include="View\frmEvent.resx">
       <DependentUpon>frmEvent.cs</DependentUpon>
     </EmbeddedResource>

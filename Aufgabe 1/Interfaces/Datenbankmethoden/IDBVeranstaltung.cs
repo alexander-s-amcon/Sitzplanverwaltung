@@ -9,7 +9,7 @@ namespace Aufgabe_1.Interfaces.Datenbankmethoden
 {
     public interface IDBVeranstaltung
     {
-        List<Veranstaltungen> LadeVeranstaltung();
+        List<Veranstaltungen> LadeVeranstaltungen();
         void AddVeranstaltung(Veranstaltungen veranstaltung);
         void EditVeranstaltung(Veranstaltungen veranstaltung);
         void DeleteVeranstaltung(Veranstaltungen veranstaltung);

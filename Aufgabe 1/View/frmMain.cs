@@ -8,13 +8,9 @@ using System.Drawing;
 using System.Linq;
 using Aufgabe_1.Datenbankmethoden;
 using Aufgabe_1.Interfaces.Datenbankmethoden;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
-using System.Web.UI.Design;
 using Aufgabe_1.Model;
-using System.Data.SqlClient;
-using C1.Framework;
 using Aufgabe_1.View;
-using System.Drawing.Text;
+using System.Reflection.Emit;
 
 namespace Aufgabe_1
 {
@@ -32,12 +28,7 @@ namespace Aufgabe_1
         public frmMain()
         {
             InitializeComponent();
-            btnVeranstaltungEdit.Enabled = false;
-            btnVeranstaltundDelete.Enabled = false;
-            btnSaalDelete.Enabled = false;
-            btnSaalEdit.Enabled = false;
-            button1.Enabled = false;
-            gridSaal.AllowEditing = false;
+            CreateTables();
             gridSaal.Rows.Fixed = 0;
             gridSaal.Cols.Fixed = 0;
             for (int i = 0; i < c1FlexGrid1.Cols.Count; i++)
@@ -47,6 +38,14 @@ namespace Aufgabe_1
             db_Connection = new SQLiteConnection();
             db_Connection.ConnectionString = connectionString;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
+        }
+
+        private void CreateTables()
+        {
+            IDBSaal dBSaal = new DBSaal();
+            dBSaal.CreateSaal();
+            IDBVeranstaltung dBVeranstaltung = new DBVeranstaltung();
+            dBVeranstaltung.CreateVeranstaltungen();
         }
 
         private void LadeSaele()
@@ -63,43 +62,49 @@ namespace Aufgabe_1
 
         private void LadeFlexgrid()
         {
-            IDBVeranstaltung dBVeranstaltung = new DBVeranstaltung();
-            Veranstaltungen veranstaltung = new Veranstaltungen();
-            IDBSaal dBSaal = new DBSaal();
-            Saele saal = new Saele();
-            string saalname = (string)gridSaal.GetData(gridSaal.RowSel, 1);
-            SQLiteCommand sql_Command = new SQLiteCommand();
-            db_Connection.Open();
-
-            sql_Command = db_Connection.CreateCommand();
-            sql_Command.CommandText = $"SELECT Reihen, Sitzplaetze FROM Saele WHERE Saalname = '{saalname}'";
-            SQLiteDataReader reader;
-            reader = sql_Command.ExecuteReader();
-            while (reader.Read())
+            try
             {
-                reihen = (int)reader.GetInt32(0);
-                sitzplaetze = (int)reader.GetInt32(1);
-            }
-            reader.Close();
-            sql_Command.Dispose();
-            db_Connection.Close();
-            c1FlexGrid1.Cols.Count = sitzplaetze;
-            c1FlexGrid1.Rows.Count = reihen;
+                IDBVeranstaltung dBVeranstaltung = new DBVeranstaltung();
+                Veranstaltungen veranstaltung = new Veranstaltungen();
+                IDBSaal dBSaal = new DBSaal();
+                Saele saal = new Saele();
+                string saalname = (string)gridSaal.GetData(gridSaal.RowSel, 1);
+                SQLiteCommand sql_Command = new SQLiteCommand();
+                db_Connection.Open();
 
-            for (int i = 1; i < sitzplaetze; i++)
-            {
-                c1FlexGrid1.Cols[i].Width = 40;
-                c1FlexGrid1.Cols[i].Caption = i.ToString();
+                sql_Command = db_Connection.CreateCommand();
+                sql_Command.CommandText = $"SELECT Reihen, Sitzplaetze FROM Saele WHERE Saalname = '{saalname}'";
+                SQLiteDataReader reader;
+                reader = sql_Command.ExecuteReader();
+                while (reader.Read())
+                {
+                    reihen = (int)reader.GetInt32(0);
+                    sitzplaetze = (int)reader.GetInt32(1);
+                }
+                reader.Close();
+                sql_Command.Dispose();
+                db_Connection.Close();
+                c1FlexGrid1.Cols.Count = sitzplaetze;
+                c1FlexGrid1.Rows.Count = reihen;
+
+                for (int i = 1; i < sitzplaetze; i++)
+                {
+                    c1FlexGrid1.Cols[i].Width = 40;
+                    c1FlexGrid1.Cols[i].Caption = i.ToString();
+                }
             }
+            catch (Exception) { }
         }
 
         private void LadeVeranstaltungen()
         {
-            IDBSaal dBSaal = new DBSaal();
             Saele saal = new Saele();
             int rowsel = gridSaal.RowSel;
             saal.Id = (int)gridSaal.GetData(rowsel, 0);
             saal.Saalname = (string)gridSaal.GetData(rowsel, 1);
+            //IDBVeranstaltung dBVeranstaltung = new DBVeranstaltung();
+            //List<Veranstaltungen> veranstaltungsliste = dBVeranstaltung.LadeVeranstaltungen();
+
             db_Connection = new SQLiteConnection();
             db_Connection.ConnectionString = connectionString;
             db_Connection.Open();
@@ -120,6 +125,7 @@ namespace Aufgabe_1
             }
             sql_Command.Dispose();
             db_Connection.Close();
+
             gridVeranstaltungen.DataSource = veranstaltungsliste;
             gridVeranstaltungen.Cols[4].Format = "dd/MM/yyyy HH:mm";
             gridVeranstaltungen.Cols[5].Format = "dd/MM/yyyy HH:mm";
@@ -129,7 +135,6 @@ namespace Aufgabe_1
             gridVeranstaltungen.Cols[2].Width = 150;
             gridVeranstaltungen.Cols[4].Width = 150;
             gridVeranstaltungen.Cols[5].Width = 150;
-
         }
 
         public void LadeDatenbankeintraege()
@@ -141,70 +146,77 @@ namespace Aufgabe_1
             IDBVeranstaltung dBVeranstaltung = new DBVeranstaltung();
             Veranstaltungen veranstaltung = new Veranstaltungen();
             int rowsel = gridVeranstaltungen.RowSel;
-            EventName = (string)gridVeranstaltungen.GetData(rowsel, 2);
-            veranstaltung.Name = EventName;
-            db_Connection.Open();
-            SQLiteCommand sql_Command = new SQLiteCommand();
-            sql_Command = db_Connection.CreateCommand();
-            sql_Command.CommandText = $"SELECT * FROM [{EventName}]";
-            SQLiteDataReader reader = sql_Command.ExecuteReader();
-            List<Sitzplatz> sitzplatzliste = new List<Sitzplatz>();
-            while (reader.Read())
+            try
             {
-                Sitzplatz Sitzplatz = new Sitzplatz();
-                Sitzplatz.Id = reader.GetInt32(0);
-                Sitzplatz.Reihe = reader.GetInt32(1);
-                Sitzplatz.Spalte = reader.GetInt32(2);
-                Sitzplatz.Zustand = reader.GetString(3);
-                sitzplatzliste.Add(Sitzplatz);
-            }
-            _sitzplatzliste = sitzplatzliste;
-            sql_Command.Dispose();
-            db_Connection.Close();
-
-            for (int rows = 0; rows < c1FlexGrid1.Rows.Count; rows++)
-            {
-                for (int cols = 0; cols < c1FlexGrid1.Cols.Count; cols++)
+                EventName = (string)gridVeranstaltungen.GetData(rowsel, 2);
+                veranstaltung.Name = EventName;
+                db_Connection.Open();
+                SQLiteCommand sql_Command = new SQLiteCommand();
+                sql_Command = db_Connection.CreateCommand();
+                sql_Command.CommandText = $"SELECT * FROM [{EventName}]";
+                SQLiteDataReader reader = sql_Command.ExecuteReader();
+                List<Sitzplatz> sitzplatzliste = new List<Sitzplatz>();
+                while (reader.Read())
                 {
-                    c1FlexGrid1.SetCellStyle(rows, cols, WhiteCellStyle);
+                    Sitzplatz Sitzplatz = new Sitzplatz();
+                    Sitzplatz.Id = reader.GetInt32(0);
+                    Sitzplatz.Reihe = reader.GetInt32(1);
+                    Sitzplatz.Spalte = reader.GetInt32(2);
+                    Sitzplatz.Zustand = reader.GetString(3);
+                    sitzplatzliste.Add(Sitzplatz);
                 }
-            }
+                _sitzplatzliste = sitzplatzliste;
+                sql_Command.Dispose();
+                db_Connection.Close();
 
-            for (int i = c1FlexGrid1.Rows.Fixed; i < c1FlexGrid1.Rows.Count; i++)
-            {
-                c1FlexGrid1[i, 0] = i.ToString();
-            }
-
-            db_Connection.Open();
-            CellStyle c1 = c1FlexGrid1.Styles.Add("Reserviert");
-            CellStyle c2 = c1FlexGrid1.Styles.Add("Freier Platz");
-            CellStyle c3 = c1FlexGrid1.Styles.Add("Platzhalter");
-            c1.BackColor = Color.Red;
-            c2.BackColor = Color.Green;
-            c3.BackColor = Color.Gray;
-
-            for (int rows = 1; rows < c1FlexGrid1.Rows.Count; rows++)
-            {
-                for (int cols = 1; cols < c1FlexGrid1.Cols.Count; cols++)
+                for (int rows = 0; rows < c1FlexGrid1.Rows.Count; rows++)
                 {
-                    Sitzplatz sitzplatz = _sitzplatzliste.Where(x => x.Reihe == rows && x.Spalte == cols).FirstOrDefault();
-                    string Zustand = sitzplatz.Zustand;
-
-                    if (Zustand == "Reserviert")
+                    for (int cols = 0; cols < c1FlexGrid1.Cols.Count; cols++)
                     {
-                        c1FlexGrid1.SetCellStyle(rows, cols, c1);
-                    }
-                    else if (Zustand == "Freier Platz")
-                    {
-                        c1FlexGrid1.SetCellStyle(rows, cols, c2);
-                    }
-                    else if (Zustand == "Platzhalter")
-                    {
-                        c1FlexGrid1.SetCellStyle(rows, cols, c3);
+                        c1FlexGrid1.SetCellStyle(rows, cols, WhiteCellStyle);
                     }
                 }
+
+                for (int i = c1FlexGrid1.Rows.Fixed; i < c1FlexGrid1.Rows.Count; i++)
+                {
+                    c1FlexGrid1[i, 0] = i.ToString();
+                }
+
+                db_Connection.Open();
+                CellStyle c1 = c1FlexGrid1.Styles.Add("Reserviert");
+                CellStyle c2 = c1FlexGrid1.Styles.Add("Freier Platz");
+                CellStyle c3 = c1FlexGrid1.Styles.Add("Platzhalter");
+                c1.BackColor = Color.Red;
+                c2.BackColor = Color.Green;
+                c3.BackColor = Color.Gray;
+
+                for (int rows = 1; rows < c1FlexGrid1.Rows.Count; rows++)
+                {
+                    for (int cols = 1; cols < c1FlexGrid1.Cols.Count; cols++)
+                    {
+                        Sitzplatz sitzplatz = _sitzplatzliste.Where(x => x.Reihe == rows && x.Spalte == cols).FirstOrDefault();
+                        string Zustand = sitzplatz.Zustand;
+
+                        if (Zustand == "Reserviert")
+                        {
+                            c1FlexGrid1.SetCellStyle(rows, cols, c1);
+                        }
+                        else if (Zustand == "Freier Platz")
+                        {
+                            c1FlexGrid1.SetCellStyle(rows, cols, c2);
+                        }
+                        else if (Zustand == "Platzhalter")
+                        {
+                            c1FlexGrid1.SetCellStyle(rows, cols, c3);
+                        }
+                    }
+                }
+                db_Connection.Close();
             }
-            db_Connection.Close();
+            catch (Exception)
+            {
+
+            }
         }
         private void CreateDataBase()
         {
@@ -220,6 +232,7 @@ namespace Aufgabe_1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            CreateTables();
             CreateDataBase();
             LadeSaele();
             SetWhite();
@@ -228,9 +241,6 @@ namespace Aufgabe_1
             gridVeranstaltungen.Cols[0].Visible = false;
             gridVeranstaltungen.Cols[1].Visible = false;
             gridVeranstaltungen.Cols[2].Visible = false;
-
-            IDBVeranstaltung dBVeranstaltung = new DBVeranstaltung();
-            dBVeranstaltung.CreateVeranstaltungen();
         }
 
         private void c1FlexGrid1_Click(object sender, EventArgs e)
@@ -400,42 +410,51 @@ namespace Aufgabe_1
 
         private void btnVeranstaltungEdit_Click(object sender, EventArgs e)
         {
-            frmEvent frmEvent = new frmEvent();
-            IDBVeranstaltung dBVeranstaltung = new DBVeranstaltung();
-            Veranstaltungen veranstaltung = new Veranstaltungen();
-            int rowsel = gridVeranstaltungen.RowSel;
-            veranstaltung.Id = (int)gridVeranstaltungen.GetData(rowsel, 1);
-            veranstaltung.Name = (string)gridVeranstaltungen.GetData(rowsel, 2);
-            veranstaltung.Saal = (string)gridVeranstaltungen.GetData(rowsel, 3);
-            veranstaltung.von = (DateTime)gridVeranstaltungen.GetData(rowsel, 4);
-            veranstaltung.bis = (DateTime)gridVeranstaltungen.GetData(rowsel, 5);
-            bool isClicked = frmEvent.Zeige(ref veranstaltung);
-            if (isClicked == true)
+            try
             {
-                dBVeranstaltung.EditVeranstaltung(veranstaltung);
-            }
+                frmEvent frmEvent = new frmEvent();
+                IDBVeranstaltung dBVeranstaltung = new DBVeranstaltung();
+                Veranstaltungen veranstaltung = new Veranstaltungen();
+                int rowsel = gridVeranstaltungen.RowSel;
+                veranstaltung.Id = (int)gridVeranstaltungen.GetData(rowsel, 1);
+                veranstaltung.Name = (string)gridVeranstaltungen.GetData(rowsel, 2);
+                veranstaltung.Saal = (string)gridVeranstaltungen.GetData(rowsel, 3);
+                veranstaltung.von = (DateTime)gridVeranstaltungen.GetData(rowsel, 4);
+                veranstaltung.bis = (DateTime)gridVeranstaltungen.GetData(rowsel, 5);
+                bool isClicked = frmEvent.Zeige(ref veranstaltung);
+                if (isClicked == true)
+                {
+                    dBVeranstaltung.EditVeranstaltung(veranstaltung);
+                }
 
-            LadeVeranstaltungen();
+                LadeVeranstaltungen();
+            }
+            catch (Exception) { }
+
         }
 
         private void btnVeranstaltundDelete_Click(object sender, EventArgs e)
         {
-            IDBVeranstaltung dBVeranstaltung = new DBVeranstaltung();
-            Veranstaltungen veranstaltung = new Veranstaltungen();
-            int eventId;
-            int rowsel = gridVeranstaltungen.RowSel;
-            eventId = (int)gridVeranstaltungen.GetData(rowsel, 1);
-            veranstaltung.Id = eventId;
-            dBVeranstaltung.DeleteVeranstaltung(veranstaltung);
-            db_Connection.Open();
-            SQLiteCommand sql_Command = new SQLiteCommand();
-            sql_Command = db_Connection.CreateCommand();
-            string EventName = (string)gridVeranstaltungen.GetData(gridVeranstaltungen.RowSel, 2);
-            sql_Command.CommandText = $"DROP TABLE '{EventName}'";
-            sql_Command.ExecuteNonQuery();
-            sql_Command.Dispose();
-            db_Connection.Close();
-            LadeVeranstaltungen();
+            try
+            {
+                IDBVeranstaltung dBVeranstaltung = new DBVeranstaltung();
+                Veranstaltungen veranstaltung = new Veranstaltungen();
+                int eventId;
+                int rowsel = gridVeranstaltungen.RowSel;
+                eventId = (int)gridVeranstaltungen.GetData(rowsel, 1);
+                veranstaltung.Id = eventId;
+                dBVeranstaltung.DeleteVeranstaltung(veranstaltung);
+                db_Connection.Open();
+                SQLiteCommand sql_Command = new SQLiteCommand();
+                sql_Command = db_Connection.CreateCommand();
+                string EventName = (string)gridVeranstaltungen.GetData(gridVeranstaltungen.RowSel, 2);
+                sql_Command.CommandText = $"DROP TABLE '{EventName}'";
+                sql_Command.ExecuteNonQuery();
+                sql_Command.Dispose();
+                db_Connection.Close();
+                LadeVeranstaltungen();
+            }
+            catch (Exception) { }
         }
 
         private void gridVeranstaltungen_Click(object sender, EventArgs e)
@@ -449,7 +468,7 @@ namespace Aufgabe_1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            frmPlatzsuche frmPlatzsuche = new frmPlatzsuche(EventName, reihen , sitzplaetze);
+            frmPlatzsuche frmPlatzsuche = new frmPlatzsuche(EventName, reihen, sitzplaetze);
             frmPlatzsuche.ShowDialog();
         }
     }

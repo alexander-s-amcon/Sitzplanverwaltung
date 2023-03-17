@@ -26,9 +26,12 @@ namespace Aufgabe_1
         public bool Zeige(ref Saele saal)
         {
             textBox1.Text = saal.Saalname;
+            if (saal.Reihen > 0 )
+            {
+                numericUpDown1.Value = saal.Reihen-1;
+                numericUpDown2.Value = saal.Sitzplaetze-1;
+            }
 
-            numericUpDown1.Value = saal.Reihen;
-            numericUpDown2.Value = saal.Sitzplaetze;
             ShowDialog();
 
             if (erfolg == true)

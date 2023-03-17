@@ -46,6 +46,10 @@
             // 
             // c1FlexGrid1
             // 
+            this.c1FlexGrid1.AllowDragging = C1.Win.C1FlexGrid.AllowDraggingEnum.None;
+            this.c1FlexGrid1.AllowEditing = false;
+            this.c1FlexGrid1.AllowResizing = C1.Win.C1FlexGrid.AllowResizingEnum.None;
+            this.c1FlexGrid1.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.None;
             this.c1FlexGrid1.BorderStyle = C1.Win.C1FlexGrid.Util.BaseControls.BorderStyleEnum.FixedSingle;
             this.c1FlexGrid1.ColumnInfo = resources.GetString("c1FlexGrid1.ColumnInfo");
             this.c1FlexGrid1.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -105,6 +109,8 @@
             // 
             this.gridSaal.AllowDragging = C1.Win.C1FlexGrid.AllowDraggingEnum.None;
             this.gridSaal.AllowEditing = false;
+            this.gridSaal.AllowResizing = C1.Win.C1FlexGrid.AllowResizingEnum.None;
+            this.gridSaal.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.None;
             this.gridSaal.ColumnInfo = "3,1,0,0,0,-1,Columns:1{Width:39;Visible:False;Style:\"Font:Microsoft Sans Serif, 9" +
     ".75pt;\";}\t";
             this.gridSaal.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -120,6 +126,8 @@
             // 
             this.gridVeranstaltungen.AllowDragging = C1.Win.C1FlexGrid.AllowDraggingEnum.None;
             this.gridVeranstaltungen.AllowEditing = false;
+            this.gridVeranstaltungen.AllowResizing = C1.Win.C1FlexGrid.AllowResizingEnum.None;
+            this.gridVeranstaltungen.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.None;
             this.gridVeranstaltungen.ColumnInfo = "3,1,0,0,0,-1,Columns:1{Width:39;Visible:False;Style:\"Font:Microsoft Sans Serif, 9" +
     ".75pt;\";}\t";
             this.gridVeranstaltungen.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

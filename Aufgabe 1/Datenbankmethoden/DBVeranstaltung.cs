@@ -84,7 +84,7 @@ namespace Aufgabe_1.Datenbankmethoden
             return;
         }
 
-        public List<Veranstaltungen> LadeVeranstaltung()
+        public List<Veranstaltungen> LadeVeranstaltungen()
         {
             db_Connection = new SQLiteConnection();
             db_Connection.ConnectionString = connectionString;
@@ -100,8 +100,8 @@ namespace Aufgabe_1.Datenbankmethoden
                 veranstaltung.Id = reader.GetInt32(0);
                 veranstaltung.Name = reader.GetString(1);
                 veranstaltung.Saal = reader.GetString(2);
-                veranstaltung.von = reader.GetDateTime(3);
-                veranstaltung.bis = reader.GetDateTime(4);
+                veranstaltung.von = Convert.ToDateTime(reader.GetString(3));
+                veranstaltung.bis = Convert.ToDateTime(reader.GetString(4));
                 veranstaltungsliste.Add(veranstaltung);
             }
             sql_Command.Dispose();
@@ -133,5 +133,8 @@ namespace Aufgabe_1.Datenbankmethoden
             sql_Command.Dispose();
             db_Connection.Close();
         }
+
+
+
     }
 }
