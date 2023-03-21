@@ -37,6 +37,8 @@ namespace Aufgabe_1.View
         CellStyle c2;
         CellStyle c3;
         CellStyle c4;
+        CellStyle c5;
+
         public frmPlatzsuche(string EventName, int Reihen, int Sitzplaetze)
         {
             InitializeComponent();
@@ -45,12 +47,15 @@ namespace Aufgabe_1.View
 
             c1 = gridPlatzsuche2.Styles.Add("Freier Platz");
             c2 = gridPlatzsuche2.Styles.Add("Ausgewählt");
-            c3 = gridPlatzsuche2.Styles.Add("Verfügbar");
+            c3 = gridPlatzsuche2.Styles.Add("Grün");
             c4 = gridPlatzsuche2.Styles.Add("Reserviert");
+            c5 = gridPlatzsuche2.Styles.Add("Blau");
             c1.BackColor = Color.White;
             c2.BackColor = Color.Gold;
             c3.BackColor = Color.LightGreen;
             c4.BackColor = Color.Gray;
+            c5.BackColor = Color.Blue;
+
 
             gridPlatzsuche2.Styles.Normal.Border.Style = BorderStyleEnum.Flat;
             gridPlatzsuche2.Styles.Normal.Border.Color = Color.DarkGray;
@@ -167,17 +172,15 @@ namespace Aufgabe_1.View
 
         private void ErmittleZusammenhaengendeSitzplaetze(int tickets)
         {
-            int mid = gridPlatzsuche2.Cols.Count / 2;
             bool platzcounterGleichTickets = false;
-            int platzcounter = 0;
-
             for (int reihe = 1; reihe < gridPlatzsuche2.Rows.Count; reihe++)
             {
                 if (platzcounterGleichTickets)
                 {
                     break;
                 }
-                for (int sitzplatz = mid; sitzplatz < gridPlatzsuche2.Cols.Count && sitzplatz >= 1; NaechsterPlatz(sitzplatz))
+                int platzcounter = 0;
+                for (int sitzplatz = 1; sitzplatz < gridPlatzsuche2.Cols.Count; sitzplatz++)
                 {
                     if (gridPlatzsuche2.GetCellStyle(reihe, sitzplatz).BackColor == Color.White)
                     {
@@ -205,87 +208,8 @@ namespace Aufgabe_1.View
                     }
                 }
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            //bool platzcounterGleichTickets = false;
-            //for (int reihe = 1; reihe < gridPlatzsuche2.Rows.Count; reihe++)
-            //{
-            //    if (platzcounterGleichTickets)
-            //    {
-            //        break;
-            //    }
-            //    int platzcounter = 0;
-            //    for (int sitzplatz = 1; sitzplatz < gridPlatzsuche2.Cols.Count; sitzplatz++)
-            //    {
-            //        if (gridPlatzsuche2.GetCellStyle(reihe, sitzplatz).BackColor == Color.White)
-            //        {
-            //            platzcounter++;
-            //            gridPlatzsuche2.SetCellStyle(reihe, sitzplatz, c2);
-            //        }
-            //        if (platzcounter == tickets)
-            //        {
-            //            platzcounterGleichTickets = true;
-            //            break;
-            //        }
-            //        if (gridPlatzsuche2.GetCellStyle(reihe, sitzplatz).BackColor == Color.Gray || sitzplatz == gridPlatzsuche2.Cols.Count-1)
-            //        {
-            //            for (int r = 1; r <= reihe; r++)
-            //            {
-            //                for (int c = 1; c < gridPlatzsuche2.Cols.Count; c++)
-            //                {
-            //                    if (gridPlatzsuche2.GetCellStyle(r, c).BackColor == Color.Gold)
-            //                    {
-            //                        gridPlatzsuche2.SetCellStyle(r, c, c1);
-            //                    }
-            //                }
-            //            }
-            //            platzcounter = 0;
-            //        }
-            //    }
-            //}
         }
+
 
 
         private void ErmittleUnzusammenhaengendeSitzplaetze(int tickets)
