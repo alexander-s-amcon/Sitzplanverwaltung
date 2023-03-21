@@ -28,32 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.gridPlatzsuche = new C1.Win.C1FlexGrid.C1FlexGrid();
             this.nudTickets = new System.Windows.Forms.NumericUpDown();
             this.lblTickets = new System.Windows.Forms.Label();
             this.cbZusammen = new System.Windows.Forms.CheckBox();
             this.btnReservieren = new System.Windows.Forms.Button();
             this.btnAnzeigen = new System.Windows.Forms.Button();
             this.btnAbbrechen = new System.Windows.Forms.Button();
-            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            ((System.ComponentModel.ISupportInitialize)(this.gridPlatzsuche)).BeginInit();
+            this.gridPlatzsuche2 = new C1.Win.C1FlexGrid.C1FlexGrid();
             ((System.ComponentModel.ISupportInitialize)(this.nudTickets)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridPlatzsuche2)).BeginInit();
             this.SuspendLayout();
-            // 
-            // gridPlatzsuche
-            // 
-            this.gridPlatzsuche.AllowDragging = C1.Win.C1FlexGrid.AllowDraggingEnum.None;
-            this.gridPlatzsuche.AllowEditing = false;
-            this.gridPlatzsuche.AllowResizing = C1.Win.C1FlexGrid.AllowResizingEnum.None;
-            this.gridPlatzsuche.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.None;
-            this.gridPlatzsuche.ColumnInfo = "10,1,0,0,0,-1,Columns:";
-            this.gridPlatzsuche.HighLight = C1.Win.C1FlexGrid.HighLightEnum.Never;
-            this.gridPlatzsuche.Location = new System.Drawing.Point(12, 94);
-            this.gridPlatzsuche.Name = "gridPlatzsuche";
-            this.gridPlatzsuche.SelectionMode = C1.Win.C1FlexGrid.SelectionModeEnum.Cell;
-            this.gridPlatzsuche.Size = new System.Drawing.Size(486, 345);
-            this.gridPlatzsuche.TabIndex = 0;
-            this.gridPlatzsuche.Click += new System.EventHandler(this.gridPlatzsuche_Click);
             // 
             // nudTickets
             // 
@@ -126,25 +110,40 @@
             this.btnAbbrechen.UseVisualStyleBackColor = false;
             this.btnAbbrechen.Click += new System.EventHandler(this.btnAbbrechen_Click);
             // 
+            // gridPlatzsuche2
+            // 
+            this.gridPlatzsuche2.AllowDragging = C1.Win.C1FlexGrid.AllowDraggingEnum.None;
+            this.gridPlatzsuche2.AllowEditing = false;
+            this.gridPlatzsuche2.AllowResizing = C1.Win.C1FlexGrid.AllowResizingEnum.None;
+            this.gridPlatzsuche2.AllowSorting = C1.Win.C1FlexGrid.AllowSortingEnum.None;
+            this.gridPlatzsuche2.BorderStyle = C1.Win.C1FlexGrid.Util.BaseControls.BorderStyleEnum.FixedSingle;
+            this.gridPlatzsuche2.ColumnInfo = "10,1,0,0,0,-1,Columns:";
+            this.gridPlatzsuche2.HighLight = C1.Win.C1FlexGrid.HighLightEnum.Never;
+            this.gridPlatzsuche2.Location = new System.Drawing.Point(12, 98);
+            this.gridPlatzsuche2.Name = "gridPlatzsuche2";
+            this.gridPlatzsuche2.Size = new System.Drawing.Size(486, 346);
+            this.gridPlatzsuche2.TabIndex = 7;
+            this.gridPlatzsuche2.Click += new System.EventHandler(this.gridPlatzsuche2_Click);
+            // 
             // frmPlatzsuche
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(510, 536);
+            this.Controls.Add(this.gridPlatzsuche2);
             this.Controls.Add(this.btnAbbrechen);
             this.Controls.Add(this.btnAnzeigen);
             this.Controls.Add(this.btnReservieren);
             this.Controls.Add(this.cbZusammen);
             this.Controls.Add(this.lblTickets);
             this.Controls.Add(this.nudTickets);
-            this.Controls.Add(this.gridPlatzsuche);
             this.Name = "frmPlatzsuche";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frmPlatzsuche";
             this.Load += new System.EventHandler(this.frmPlatzsuche_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.gridPlatzsuche)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTickets)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridPlatzsuche2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -152,13 +151,12 @@
 
         #endregion
 
-        private C1.Win.C1FlexGrid.C1FlexGrid gridPlatzsuche;
         private System.Windows.Forms.NumericUpDown nudTickets;
         private System.Windows.Forms.Label lblTickets;
         private System.Windows.Forms.CheckBox cbZusammen;
         private System.Windows.Forms.Button btnReservieren;
         private System.Windows.Forms.Button btnAnzeigen;
         private System.Windows.Forms.Button btnAbbrechen;
-        private System.Windows.Forms.ColorDialog colorDialog1;
+        private C1.Win.C1FlexGrid.C1FlexGrid gridPlatzsuche2;
     }
 }
