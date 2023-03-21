@@ -177,7 +177,7 @@ namespace Aufgabe_1.View
                 {
                     break;
                 }
-                for (int sitzplatz = mid; sitzplatz < gridPlatzsuche2.Cols.Count; NaechsterPlatz(sitzplatz))
+                for (int sitzplatz = mid; sitzplatz < gridPlatzsuche2.Cols.Count && sitzplatz >= 1; NaechsterPlatz(sitzplatz))
                 {
                     if (gridPlatzsuche2.GetCellStyle(reihe, sitzplatz).BackColor == Color.White)
                     {
